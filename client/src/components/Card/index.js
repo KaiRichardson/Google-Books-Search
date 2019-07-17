@@ -1,10 +1,14 @@
 import React from "react";
-import "./style.css";
 
-const Card = props => (
-  <div className="click-item" onClick={props.onClick}>
-    <img alt={props.name} src={props.image} id={props.key}/>
-  </div>
-);
+function Card(props) {
+  return (
+    <div className="card text-center">
+      <div className="card-header">
+        <h2>{props.heading}</h2>
+      </div>
+      <div className="card-body">{props.children}</div>
+    </div>
+  );
+}
 
 export default Card;
