@@ -17,10 +17,13 @@ import API from "../utils/API";
 class Books extends Component {
   state = {
     books: [],
+    result: [],
     title: "",
-    author: "",
+    authors: "",
     synopsis: "",
-    result: {},
+    published: "",
+    categories: "",
+    rating: "",
     search: ""
   };
 
@@ -55,12 +58,11 @@ class Books extends Component {
   searchGoogleBooks = query => {
     API.searchBooks(query)
       .then(res => {
-        this.setState({ result: res.data })
+        this.setState({ result: res.data.items });
         // console.log(res.data)
-        console.log(this.state.result.items);
+        console.log(this.state.result);
       })
       .catch(err => console.log(err));
-    
   };
 
   handleInputChange = event => {
@@ -90,16 +92,15 @@ class Books extends Component {
             />
             {this.state.result.length ? (
               <List>
-                {this.state.result.items.map(book => (
-                  <ListItem key={book._id}>
+                {this.state.result.map(book => (
+                  <ListItem key={book.id}>
                     <BookDetail
-                      title={this.state.result.items.volumeInfo.title}
-                      src={this.state.result.items.volumeInfo.thumbnail}
-                      authors={this.state.result.items.volumeInfo.authors}
-                      genre={this.state.result.items.volumeInfo.categories}
-                      published={
-                        this.state.result.items.volumeInfo.publishedDate
-                      }
+                      title={book.volumeInfo.title}
+                      src={book.volumeInfo.imageLinks.thumbnail}
+                      authors={book.volumeInfo.authors}
+                      genre={book.volumeInfo.categories}
+                      published={book.volumeInfo.publishedDate}
+                      description={book.volumeInfo.searchInfo.textSnippet}
                     />
                   </ListItem>
                 ))}
