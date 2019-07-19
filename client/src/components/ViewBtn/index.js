@@ -5,9 +5,9 @@ import "./style.css";
 // That way we don't have to define them all individually
 function ViewBtn(props) {
   return (
-    <span className="view-btn" {...props} role="button" tabIndex="0">
+    <a className="view-btn" {...props} role="button" tabIndex="0" target="_blank">
       👁
-    </span>
+    </a>
   );
 }
 
