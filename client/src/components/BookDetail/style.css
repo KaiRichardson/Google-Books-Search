@@ -1,0 +1,10 @@
+.book_card img {
+  display: block;
+  height: 120px;
+  margin: 10px auto;
+}
+
+.book_card h3 {
+  margin: 10px 0;
+  font-size: 12px;
+}

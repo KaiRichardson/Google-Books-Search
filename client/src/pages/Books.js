@@ -8,9 +8,9 @@ import SearchForm from "../components/SearchForm";
 import BookDetail from "../components/BookDetail";
 import Jumbotron from "../components/Jumbotron";
 import DeleteBtn from "../components/DeleteBtn";
-import SaveBtn from "../components/SaveBtn";
-import ViewBtn from "../components/ViewBtn";
-import Card from "../components/Card";
+// import SaveBtn from "../components/SaveBtn";
+// import ViewBtn from "../components/ViewBtn";
+// import Card from "../components/Card";
 
 import API from "../utils/API";
 
@@ -81,7 +81,7 @@ class Books extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col size="md-6">
+          <Col size="md-6 sm-12">
             <Jumbotron>
               <h1>Search For A Book</h1>
             </Jumbotron>
@@ -97,10 +97,20 @@ class Books extends Component {
                     <BookDetail
                       title={book.volumeInfo.title}
                       src={book.volumeInfo.imageLinks.thumbnail}
-                      authors={book.volumeInfo.authors}
-                      genre={book.volumeInfo.categories}
+                      authors={
+                        book.volumeInfo.authors
+                          ? book.volumeInfo.authors.join(", ")
+                          : "*not listed*"
+                      }
+                      genre={book.volumeInfo.categories.join(" & ")}
                       published={book.volumeInfo.publishedDate}
-                      description={book.volumeInfo.searchInfo.textSnippet}
+                      description={
+                        book.volumeInfo.description
+                          ? book.volumeInfo.description
+                              .slice(0, 200)
+                              .concat("...")
+                          : "*not listed*"
+                      }
                     />
                   </ListItem>
                 ))}
